@@ -10,7 +10,7 @@ Built with **ASP.NET Core**, **React**, **PostgreSQL + pgvector**, and **OpenAI*
 
 ---
 
-🌐 **Frontend:** https://your-vercel-url.vercel.app
+🌐 **Frontend:** https://reqintel-ai.vercel.app
 
 ⚡ **Backend API:** https://reqintel-ai.onrender.com
 
@@ -22,7 +22,7 @@ Built with **ASP.NET Core**, **React**, **PostgreSQL + pgvector**, and **OpenAI*
 
 ### Upload Document
 
-![Upload](Screenshots/Uplaod.png)
+![Upload](Screenshots/Upload.png)
 
 ---
 
