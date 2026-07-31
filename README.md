@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="Screenshots/ReqIntel-AI.png" alt="ReqIntel AI" width="180"/>
+<img src="Screenshots/ReqIntel-AI.png" alt="ReqIntel AI" width="100"/>
 
 # ReqIntel AI
 
@@ -30,7 +30,7 @@ Built with **ASP.NET Core 10**, **React**, **OpenAI**, **PostgreSQL + pgvector**
 
 ## Upload Document
 
-![Upload](Screenshots/Upload.png)
+<img src="Screenshots/Upload.png" alt="Uplaod" width="120"/>
 
 ---
 
