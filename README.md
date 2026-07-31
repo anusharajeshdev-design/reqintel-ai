@@ -1,8 +1,8 @@
 <div align="center">
 
-![ReqIntel-AI](Screenshots/ReqIntel-AI.png)
+<img src="Screenshots/ReqIntel-AI.png" alt="ReqIntel AI" width="180"/>
 
-# 🤖 ReqIntel AI
+# ReqIntel AI
 
 ## AI-Powered Document Intelligence using Retrieval-Augmented Generation (RAG)
 
