@@ -1,4 +1,4 @@
-# 🤖 ReqIntel AI
+<img width="1467" height="799" alt="Screenshot 2026-07-31 at 5 04 03 PM" src="https://github.com/user-attachments/assets/572b8e7e-f538-4e4b-9a0e-634313866f05" /># 🤖 ReqIntel AI
 
 <div align="center">
 
@@ -18,9 +18,13 @@ Built with **ASP.NET Core**, **React**, **PostgreSQL + pgvector**, and **OpenAI*
 
 ---
 
-(Screenshots/Uplaod.png)
-(Screenshots/AI.png)
+### Upload Document
 
+![Upload](Screenshots/Upload.png)
+
+### Ask AI
+
+![Ask AI](Screenshots/AI.png)
 
 # 📖 Overview
 
