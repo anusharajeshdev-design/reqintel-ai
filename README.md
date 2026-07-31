@@ -1,375 +1,219 @@
-<img width="1467" height="799" alt="Screenshot 2026-07-31 at 5 04 03 PM" src="https://github.com/user-attachments/assets/572b8e7e-f538-4e4b-9a0e-634313866f05" /># 🤖 ReqIntel AI
+# 🤖 ReqIntel AI
 
 <div align="center">
 
-### AI-Powered Requirement Intelligence using Retrieval-Augmented Generation (RAG)
+### AI-Powered Document Intelligence using Retrieval-Augmented Generation (RAG)
 
-Upload requirement documents, automatically extract and index their contents using vector embeddings, and ask natural language questions to receive accurate, context-aware AI-generated answers.
+Upload any PDF document, automatically index its contents using vector embeddings, and interact with it through natural language. ReqIntel AI retrieves the most relevant information from your documents and generates accurate, context-aware answers using Retrieval-Augmented Generation (RAG).
 
 Built with **ASP.NET Core**, **React**, **PostgreSQL + pgvector**, and **OpenAI**.
 
 ---
 
-**Frontend:** https://your-vercel-url.vercel.app
+🌐 **Frontend:** https://your-vercel-url.vercel.app
 
-**Backend API:** https://reqintel-ai.onrender.com
+⚡ **Backend API:** https://reqintel-ai.onrender.com
 
 </div>
 
 ---
 
+# 📸 Application Preview
+
 ### Upload Document
 
-![Upload](Screenshots/Upload.png)
+![Upload](Screenshots/Uplaod.png)
 
-### Ask AI
+---
+
+### Ask Questions in Natural Language
 
 ![Ask AI](Screenshots/AI.png)
 
+---
+
 # 📖 Overview
 
-ReqIntel AI is an AI-powered Requirement Intelligence platform that enables users to upload software requirement documents in PDF format and interact with them using natural language.
+ReqIntel AI is an AI-powered document intelligence platform that enables users to upload PDF documents and interact with them through natural language conversations.
 
-Traditional document search relies on keyword matching, making it difficult to locate relevant information when users phrase questions differently from the original document. ReqIntel AI overcomes this limitation by implementing a Retrieval-Augmented Generation (RAG) architecture powered by vector embeddings.
+Instead of relying on traditional keyword-based search, the application leverages Retrieval-Augmented Generation (RAG) and semantic vector search to understand the meaning behind a user's question and retrieve the most relevant information from the uploaded document.
 
-When a document is uploaded, the application automatically extracts its contents, splits the text into meaningful chunks, converts each chunk into vector embeddings using OpenAI, and stores them inside a PostgreSQL database enhanced with the pgvector extension.
+When a document is uploaded, the application automatically extracts its text, divides the content into manageable chunks, generates vector embeddings for each chunk using OpenAI, and stores them in a PostgreSQL database enhanced with the pgvector extension.
 
-When a user asks a question, the application converts the question into an embedding, performs semantic similarity search against the stored vectors, retrieves the most relevant document sections, and provides an AI-generated answer grounded in the retrieved content.
+When a user submits a question, the application generates an embedding for the query, performs semantic similarity search across the indexed document, retrieves the most relevant sections, and provides an AI-generated response grounded in the retrieved context.
 
-This enables accurate, context-aware document understanding instead of simple keyword searching.
+Whether the uploaded document is a software requirement specification, technical documentation, research paper, user manual, policy document, contract, standard operating procedure (SOP), business report, or any other text-based PDF, ReqIntel AI enables users to quickly discover information and obtain accurate answers without manually searching through hundreds of pages.
 
----
+By combining vector databases, semantic search, and Large Language Models, ReqIntel AI transforms static documents into an intelligent, searchable knowledge base capable of understanding context rather than simply matching keywords.
 
-# 🚀 Key Features
-
-## 📄 Intelligent PDF Processing
-
-- Upload requirement documents in PDF format
-- Automatic PDF text extraction
-- Supports large technical documents
-- Processes documents without manual preprocessing
-
----
-
-## ✂️ Smart Text Chunking
-
-Large documents are automatically divided into manageable text chunks before indexing.
-
-Chunking improves:
-
-- Embedding quality
-- Retrieval accuracy
-- AI response relevance
-- Semantic search performance
-
----
-
-## 🧠 OpenAI Embedding Generation
-
-Each document chunk is converted into a high-dimensional vector representation using OpenAI Embeddings.
-
-These embeddings capture the semantic meaning of the text rather than relying on exact keyword matching.
-
-Benefits include:
-
-- Semantic understanding
-- Context-aware retrieval
-- Better search quality
-- Natural language question answering
-
----
-
-## 🗄️ Vector Database (PostgreSQL + pgvector)
-
-Instead of storing only plain text, ReqIntel AI stores vector embeddings inside PostgreSQL using the pgvector extension.
-
-Each stored record contains:
-
-- Document Name
-- Chunk Index
-- Chunk Content
-- Vector Embedding
-- Creation Timestamp
-
-This enables high-performance similarity search directly inside PostgreSQL.
-
----
-
-## 🔍 Semantic Vector Search
-
-When a user asks a question:
-
-1. The question is converted into an embedding.
-2. PostgreSQL performs vector similarity search.
-3. The most relevant document chunks are retrieved.
-4. Retrieved context is passed to the language model.
-
-Unlike traditional search engines, semantic search understands the meaning of the user's question.
-
----
-
-## 🤖 Retrieval-Augmented Generation (RAG)
-
-Instead of allowing the language model to answer purely from its training knowledge, ReqIntel AI provides relevant document context before generating a response.
-
-The workflow is:
-
-- User uploads document
-- Document is indexed
-- User asks a question
-- Relevant chunks are retrieved
-- AI generates an answer using retrieved context
-
-This significantly improves:
-
-- Accuracy
-- Reliability
-- Context awareness
-- Reduction of hallucinations
-
----
 
 # 🏗️ System Architecture
 
 ```
-                        +--------------------+
-                        |   React Frontend   |
-                        +---------+----------+
-                                  |
-                                  |
+                    ┌──────────────────────────┐
+                    │      React Frontend      │
+                    │         (Vite)           │
+                    └─────────────┬────────────┘
+                                  │
+                           HTTP REST APIs
+                                  │
                                   ▼
-                    +----------------------------+
-                    | ASP.NET Core Web API       |
-                    +----------------------------+
-                    |                            |
-                    | PDF Extraction             |
-                    | Text Chunking              |
-                    | OpenAI Embeddings          |
-                    | Vector Similarity Search   |
-                    | Chat Service               |
-                    +-------------+--------------+
-                                  |
-                                  ▼
-                    +----------------------------+
-                    | PostgreSQL + pgvector      |
-                    | Vector Database            |
-                    +-------------+--------------+
-                                  |
-                                  ▼
-                           OpenAI GPT Model
+                 ┌────────────────────────────────┐
+                 │      ASP.NET Core Web API      │
+                 ├────────────────────────────────┤
+                 │                                │
+                 │  • PDF Processing              │
+                 │  • Text Extraction             │
+                 │  • Text Chunking               │
+                 │  • Embedding Generation        │
+                 │  • Vector Similarity Search    │
+                 │  • AI Chat Service             │
+                 │                                │
+                 └──────────────┬─────────────────┘
+                                │
+               ┌────────────────┴──────────────┐
+               │                               │
+               ▼                               ▼
+      PostgreSQL + pgvector            OpenAI API
+      Vector Database                  GPT & Embeddings
+               │                               │
+               └──────────────┬────────────────┘
+                              │
+                              ▼
+                  AI-Powered Contextual Response
 ```
 
 ---
 
-# 🔄 End-to-End Workflow
-
-## Step 1 — Upload Document
-
-The user uploads a requirement specification PDF through the React application.
-
-↓
-
-## Step 2 — Extract Text
-
-The backend extracts readable text using PdfPig.
-
-↓
-
-## Step 3 — Chunk the Content
-
-The extracted text is split into smaller logical sections.
-
-↓
-
-## Step 4 — Generate Embeddings
-
-Each chunk is converted into a vector embedding using OpenAI.
-
-↓
-
-## Step 5 — Store in PostgreSQL
-
-Every chunk and its embedding are stored inside PostgreSQL using pgvector.
-
-↓
-
-## Step 6 — Ask Questions
-
-The user asks a natural language question.
-
-↓
-
-## Step 7 — Retrieve Relevant Chunks
-
-The application performs vector similarity search to identify the most relevant document sections.
-
-↓
-
-## Step 8 — Generate AI Response
-
-Retrieved document context is provided to the language model, which generates an accurate answer based on the uploaded document.
-
----
-
-# 💻 Technology Stack
-
-## Frontend
-
-- React
-- Vite
-- Axios
-- HTML5
-- CSS3
-
----
-
-## Backend
-
-- ASP.NET Core 10
-- C#
-- Entity Framework Core
-- REST API
-
----
-
-## Artificial Intelligence
-
-- OpenAI GPT
-- OpenAI Embeddings
-- Retrieval-Augmented Generation (RAG)
-- Semantic Search
-
----
-
-## Database
-
-- PostgreSQL
-- pgvector Extension
-- Neon Cloud Database
-
----
-
-## Deployment
-
-- Vercel (Frontend)
-- Render (Backend)
-- Neon PostgreSQL
-
----
-
-# 📁 Project Structure
+# 🔄 RAG Workflow
 
 ```
-ReqIntelAI
-│
-├── Backend
-│   │
-│   ├── Controllers
-│   ├── Services
-│   ├── Models
-│   ├── Data
-│   ├── Migrations
-│   └── Program.cs
-│
-├── Frontend
-│   │
-│   ├── Components
-│   ├── Pages
-│   ├── Services
-│   ├── Assets
-│   └── App.jsx
-│
-└── README.md
+        User Uploads PDF
+               │
+               ▼
+     Extract Text from PDF
+               │
+               ▼
+        Split into Chunks
+               │
+               ▼
+ Generate OpenAI Embeddings
+               │
+               ▼
+ Store Embeddings in PostgreSQL
+          using pgvector
+               │
+               ▼
+      User Asks a Question
+               │
+               ▼
+ Generate Query Embedding
+               │
+               ▼
+ Vector Similarity Search
+               │
+               ▼
+ Retrieve Relevant Chunks
+               │
+               ▼
+ Send Context + Question
+       to OpenAI GPT
+               │
+               ▼
+ AI Generates Context-Aware Answer
 ```
 
----
+# 📖 How It Works
 
-# ⚙️ Local Installation
+## Step 1 — Upload a Document
 
-## Clone Repository
-
-git clone https://github.com/yourusername/reqintel-ai.git
-
+Users can upload any text-based PDF document through the web application. The system is designed to work with a wide variety of document types, including software requirement specifications, technical documentation, user manuals, research papers, contracts, business reports, policies, standard operating procedures (SOPs), and other knowledge-rich documents.
 
 ---
 
-## Backend
+## Step 2 — Text Extraction
 
-cd Backend/ReqIntel.Api
-
-dotnet restore
-
-dotnet run
-
+Once uploaded, the backend extracts all readable text from the PDF using the PdfPig library while preserving the document content for further processing.
 
 ---
 
-## Frontend
+## Step 3 — Intelligent Chunking
 
-cd Frontend/reqintel-ui
+Large documents are divided into smaller logical chunks.
 
-npm install
-
-npm run dev
-
-
-# 🌐 Deployment
-
-Frontend
-
-- Vercel
-
-Backend
-
-- Render
-
-Database
-
-- Neon PostgreSQL
+Chunking improves retrieval quality by ensuring that each embedding represents a focused section of the document rather than the entire document.
 
 ---
 
-# 📈 Future Enhancements
+## Step 4 — Embedding Generation
 
-- JWT Authentication
-- Multi-document support
-- DOCX document processing
-- Conversation history
-- Source citations
-- Streaming AI responses
-- User document management
-- Role-based access control
-- Azure OpenAI support
-- Hybrid Search (Keyword + Vector Search)
+Each text chunk is converted into a high-dimensional vector embedding using the OpenAI Embedding Model.
+
+Unlike keyword indexing, embeddings capture the semantic meaning of the content, enabling intelligent document search.
 
 ---
 
-# 🎯 Learning Outcomes
+## Step 5 — Vector Storage
 
-This project demonstrates practical implementation of modern AI application development, including:
+Each chunk, together with its generated embedding, is stored inside PostgreSQL using the pgvector extension.
 
-- Retrieval-Augmented Generation (RAG)
-- Vector Databases
-- OpenAI Embeddings
-- Semantic Search
-- ASP.NET Core API Development
-- PostgreSQL + pgvector
-- React Frontend Development
-- Cloud Deployment
-- Enterprise Application Architecture
+Stored information includes:
 
----
+• Document Name
 
-# 👩‍💻 Author
+• Chunk Index
 
-## Anusha Rajesh
+• Chunk Content
 
-Senior Software Engineer | .NET Backend Developer | AI Application Developer
+• Vector Embedding
 
-GitHub: https://github.com/anusharajeshdev-design
-
-LinkedIn: https://www.linkedin.com/in/anusha-rajeshkannan-485a83155/
+• Created Timestamp
 
 ---
 
-## ⭐ If you found this project useful, consider giving it a star!
+## Step 6 — User Question
+
+The user asks a question in natural language through the chat interface.
+
+For example:
+
+"What are the functional requirements?"
+
+"What are the security recommendations?"
+
+"Summarize the deployment architecture."
+
+"What technologies are mentioned?"
+
+---
+
+## Step 7 — Semantic Retrieval
+
+The user's question is converted into another embedding.
+
+Using vector similarity search, PostgreSQL retrieves the document chunks that are semantically closest to the question.
+
+This allows the application to understand intent instead of relying solely on keyword matching.
+
+---
+
+## Step 8 — Retrieval-Augmented Generation
+
+The retrieved document context, along with the user's question, is sent to the OpenAI GPT model.
+
+Instead of answering purely from its training knowledge, the model generates responses grounded in the uploaded document, resulting in accurate, context-aware answers while significantly reducing hallucinations.
+
+# 🚀 Features
+
+- 📄 Upload any text-based PDF document
+- 📑 Automatic PDF text extraction
+- ✂️ Intelligent document chunking
+- 🧠 OpenAI embedding generation
+- 🗄️ PostgreSQL + pgvector vector database
+- 🔍 Semantic vector similarity search
+- 🤖 Retrieval-Augmented Generation (RAG)
+- 💬 Context-aware AI question answering
+- ⚡ Fast document indexing
+- ☁️ Cloud deployment using Vercel, Render, and Neon
+- 🌐 Modern React user interface
+- 🏗️ Enterprise-ready ASP.NET Core Web API
