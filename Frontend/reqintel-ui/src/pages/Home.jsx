@@ -16,7 +16,7 @@ function Home() {
         </div>
 
         <div className="right-panel">
-          <SuggestedQuestions />
+         
           <ChatSection />
         </div>
 

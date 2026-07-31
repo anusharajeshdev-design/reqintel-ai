@@ -7,6 +7,7 @@ function UploadSection() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
+    const [dragging, setDragging] = useState(false);
 
     const uploadFile = async (file) => {
         const formData = new FormData();
@@ -14,6 +15,7 @@ function UploadSection() {
 
         try {
             setLoading(true);
+            setMessage("");
 
             const response = await api.post(
                 "/Documents/upload",
@@ -21,12 +23,10 @@ function UploadSection() {
             );
 
             setMessage(response.data.message);
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error);
             setMessage("Upload failed. Please try again.");
-        }
-        finally {
+        } finally {
             setLoading(false);
         }
     };
@@ -34,40 +34,65 @@ function UploadSection() {
     const handleFileSelect = async (event) => {
         const file = event.target.files[0];
 
-        if (!file)
-            return;
+        if (!file) return;
 
         setSelectedFile(file);
+        await uploadFile(file);
+    };
 
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        setDragging(true);
+    };
+
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        setDragging(false);
+    };
+
+    const handleDrop = async (e) => {
+        e.preventDefault();
+        setDragging(false);
+
+        const file = e.dataTransfer.files[0];
+
+        if (!file) return;
+
+        setSelectedFile(file);
         await uploadFile(file);
     };
 
     return (
         <section className="upload-section">
 
-            <h2>Upload Requirement</h2>
+            <h2>Upload Document</h2>
 
             <p>
-                Upload your requirement document (PDF or DOCX)
-                and start asking AI intelligent questions.
+                Upload any PDF document and let AI analyze its content.
+                Ask questions, generate summaries, and discover key insights.
             </p>
 
             <input
                 ref={fileInputRef}
                 type="file"
-                accept=".pdf,.doc,.docx"
+                accept=".pdf"
                 hidden
                 onChange={handleFileSelect}
             />
 
-            <div className="upload-box">
+            <div
+                className={`upload-box ${dragging ? "dragging" : ""}`}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+            >
 
                 <div className="upload-icon">
                     ☁️
                 </div>
 
                 <h3>
-                    Drag & Drop PDF or DOCX
+                    Drag & Drop Your Document
                 </h3>
 
                 <span>or</span>
@@ -80,13 +105,13 @@ function UploadSection() {
                 </button>
 
                 {selectedFile && (
-                    <p>
+                    <p style={{ marginTop: "20px" }}>
                         📄 {selectedFile.name}
                     </p>
                 )}
 
                 {message && (
-                    <p>
+                    <p style={{ marginTop: "10px" }}>
                         {message}
                     </p>
                 )}
@@ -94,7 +119,7 @@ function UploadSection() {
             </div>
 
             <small>
-                Supports PDF • DOCX • Max 20MB
+                Supports PDF • Max 20MB
             </small>
 
         </section>

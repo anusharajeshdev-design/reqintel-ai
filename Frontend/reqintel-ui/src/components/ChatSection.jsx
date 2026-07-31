@@ -2,20 +2,21 @@ import { useState } from "react";
 import api from "../services/api";
 
 function ChatSection() {
-    const welcomeMessage = {
-        sender: "ai",
-        text: `Hello! 👋
+   const welcomeMessage = {
+    sender: "ai",
+    text: `Hello! 👋
 
-Upload a requirement document and ask me anything.
+    Upload any PDF document and ask questions in natural language.
 
-I can help you with:
-• Requirement Summary
-• Backend Changes
-• Database Changes
-• API Changes
-• UI Changes
-• Test Cases
-• Requirement Gaps`
+    I can help you:
+    • Summarize documents
+    • Answer questions
+    • Explain technical concepts
+    • Extract key information
+    • Identify important sections
+    • Analyze document content
+
+    Start by uploading a document to begin.`
     };
 
     const [messages, setMessages] = useState([welcomeMessage]);

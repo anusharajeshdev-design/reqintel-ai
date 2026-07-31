@@ -6,7 +6,7 @@ function Header() {
       </div>
 
       <p className="tagline">
-        AI-Powered Requirement Intelligence
+        AI-Powered Document Intelligence
       </p>
     </header>
   );

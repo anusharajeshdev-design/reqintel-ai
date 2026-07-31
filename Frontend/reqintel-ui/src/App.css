@@ -6,26 +6,29 @@
 
 :root {
 
-  --primary: #5B5FEF;
-  --primary-light: #EEF1FF;
-  --secondary: #7C83FF;
-  --purple: #8B5CF6;
+  /* Primary Brand */
+  --primary: #4F7C82;
+  --primary-light: #EAF3F4;
+  --secondary: #93B1B5;
+  --accent: #0B2E33;
 
-  --background: #F6F8FC;
+  /* UI */
+  --background: #F7F9FA;
   --surface: #FFFFFF;
 
-  --text: #1F2937;
-  --text-light: #6B7280;
+  /* Typography */
+  --text: #203236;
+  --text-light: #667B80;
 
-  --border: #E5E7EB;
+  /* Borders */
+  --border: #D8E3E5;
 
-  --shadow:
-      0 10px 30px rgba(0,0,0,.06);
+  /* Effects */
+  --shadow: 0 12px 30px rgba(11,46,51,.08);
 
-  --radius:20px;
+  --radius: 20px;
 
 }
-
 body{
 
     background:var(--background);
@@ -296,35 +299,45 @@ input{
 
 }
 
-.upload-box button{
+.upload-box button {
 
-    background:linear-gradient(
-        135deg,
-        var(--primary),
-        var(--purple)
-    );
+   background:#F5F7FF;
 
-    color:white;
+    color:var(--primary);
 
-    border:none;
+    border: none;
+    border-radius: 14px;
 
-    border-radius:14px;
+    padding: 14px 28px;
 
-    padding:14px 28px;
+    font-size: 15px;
+    font-weight: 600;
 
-    font-size:15px;
+    cursor: pointer;
 
-    cursor:pointer;
+    transition: all .25s ease;
 
-    transition:.25s;
+    box-shadow: 0 8px 20px rgba(79, 124, 130, 0.20);
 
 }
 
-.upload-box button:hover{
+.upload-box button:hover {
 
-    transform:translateY(-2px);
+    transform: translateY(-2px);
 
-    box-shadow:0 15px 25px rgba(91,95,239,.25);
+    background:var(--primary);
+
+    color:white;
+
+    box-shadow: 0 14px 28px rgba(11, 46, 51, 0.25);
+
+}
+
+.upload-box button:active {
+
+    transform: translateY(0);
+
+    box-shadow: 0 6px 12px rgba(11, 46, 51, 0.20);
 
 }
 
@@ -560,7 +573,7 @@ input{
 
 .clear-btn:hover{
 
-    background:var(--primary);
+     background:var(--primary);
 
     color:white;
 
@@ -660,13 +673,9 @@ input{
 
 .chat-input button{
 
-    background:linear-gradient(
-        135deg,
-        var(--primary),
-        var(--purple)
-    );
+    background:#F5F7FF;
 
-    color:white;
+    color:var(--primary);
 
     border:none;
 
@@ -682,8 +691,8 @@ input{
 
 .chat-input button:hover{
 
-    transform:translateY(-2px);
+    background:var(--primary);
 
-    box-shadow:0 12px 24px rgba(91,95,239,.25);
+    color:white;
 
 }
