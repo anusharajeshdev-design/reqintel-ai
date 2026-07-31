@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="Assets/reqintel-icon.png" alt="ReqIntel AI Logo" width="120"/>
+<img src="Assets/ReqIntel-AI.png" alt="ReqIntel AI Logo" width="120"/>
 
 # 🤖 ReqIntel AI
 
