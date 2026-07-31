@@ -30,7 +30,7 @@ Built with **ASP.NET Core 10**, **React**, **OpenAI**, **PostgreSQL + pgvector**
 
 ## Upload Document
 
-<img src="Screenshots/Upload.png" alt="Uplaod" width="120"/>
+<img src="Screenshots/Upload.png" alt="Uplaod" width="140"/>
 
 ---
 
